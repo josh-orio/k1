@@ -3,3 +3,8 @@
 *.img
 *.bin
 *.iso
+
+binutils*
+
+gcc*
+build-*

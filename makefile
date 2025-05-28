@@ -3,9 +3,12 @@ PROJECT_NAME := k1
 INCLUDE := $(wildcard include/*.hpp)
 SOURCE := $(wildcard src/*.cpp)
 
-CC := g++
-LD := ld
-AS := as
+# PWD := $(pwd)
+TOOL_DIR := $(PWD)/cc/bin
+CC := $(TOOL_DIR)/aarch64-none-elf-g++ # (your g++ here)
+LD := $(TOOL_DIR)/aarch64-none-elf-ld # (your GNU ld here)
+AS := $(TOOL_DIR)/aarch64-none-elf-as # (your GNU as here)
+OBJCOPY := $(TOOL_DIR)/aarch64-none-elf-objcopy # (your GNU as here)
 
 .PHONY: all build
 
@@ -21,10 +24,15 @@ aarch64-build:
 		$(CC) -c $${f} -Iinclude -o $${f%.cpp}.o -ffreestanding -O2 -Wall -Wextra -fno-exceptions -fno-rtti; \
 	done
 
-	@$(LD) -Ttext=0x80000 boot/*.o src/*.o -o aarch64-$(PROJECT_NAME).elf
-	@objcopy -O binary aarch64-$(PROJECT_NAME).elf aarch64-$(PROJECT_NAME).img
+	@$(LD)  -Ttext=0x80000 boot/*.o src/*.o -o aarch64-$(PROJECT_NAME).elf
+	@$(OBJCOPY) -O binary aarch64-$(PROJECT_NAME).elf aarch64-$(PROJECT_NAME).img
 	@qemu-system-aarch64 -M virt -cpu cortex-a53 -nographic -kernel aarch64-$(PROJECT_NAME).img
 
 clean:
 	@rm *.o */*.o *.elf *.img
+
+retard:
+	@echo "G++: $(CC)"
+	@echo "LD $(LD)"
+	@echo "AS $(AS)"
 

@@ -2,5 +2,5 @@
 
 ## Requirements:
 
-- GNU tools {g++, ld, as}
+- GNU tools {g++, ld, as, objcopy}
 - QEMU

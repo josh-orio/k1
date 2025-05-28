@@ -10,29 +10,28 @@ export TARGET=aarch64-none-elf
 export PATH="$PREFIX/bin:$PATH"
 
 # binutils
-# only clone if not already present
-# if [ ! -f binutils-$BINUTILS_VERSION.tar.xz ]; then
-#     wget https://ftp.gnu.org/gnu/binutils/binutils-$BINUTILS_VERSION.tar.xz
-# fi
-# # only untar if not already
-# if [ ! -d binutils-$BINUTILS_VERSION ]; then
-#     tar -xvf binutils-$BINUTILS_VERSION.tar.xz
-# fi
-# mkdir -p build-binutils && cd build-binutils
-# ../binutils-$BINUTILS_VERSION/configure --target=$TARGET --prefix="$PREFIX" --with-sysroot --disable-nls --disable-werror
-# make && make install
+only clone if not already present
+if [ ! -f binutils-$BINUTILS_VERSION.tar.xz ]; then
+    wget https://ftp.gnu.org/gnu/binutils/binutils-$BINUTILS_VERSION.tar.xz
+fi
+# only untar if not already
+if [ ! -d binutils-$BINUTILS_VERSION ]; then
+    tar -xf binutils-$BINUTILS_VERSION.tar.xz
+fi
+mkdir -p build-binutils && cd build-binutils
+../binutils-$BINUTILS_VERSION/configure --target=$TARGET --prefix="$PREFIX" --with-sysroot --disable-nls --disable-werror
+make && make install
 
-# cd ..
+cd ..
 
 # gcc
-
 # only clone if not already present
 if [ ! -f gcc-$GCC_VERSION.tar.xz ]; then
     wget https://mirrorservice.org/sites/sourceware.org/pub/gcc/releases/gcc-$GCC_VERSION/gcc-$GCC_VERSION.tar.xz
 fi
 # only untar if not already
 if [ ! -d gcc-$GCC_VERSION ]; then
-    tar -xvf gcc-$GCC_VERSION.tar.xz
+    tar -xf gcc-$GCC_VERSION.tar.xz
 fi
 
 # download GMP, MPFR, MPC

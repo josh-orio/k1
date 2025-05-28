@@ -3,12 +3,11 @@ PROJECT_NAME := k1
 INCLUDE := $(wildcard include/*.hpp)
 SOURCE := $(wildcard src/*.cpp)
 
-# PWD := $(pwd)
 TOOL_DIR := $(PWD)/cc/bin
-CC := $(TOOL_DIR)/aarch64-none-elf-g++ # (your g++ here)
-LD := $(TOOL_DIR)/aarch64-none-elf-ld # (your GNU ld here)
-AS := $(TOOL_DIR)/aarch64-none-elf-as # (your GNU as here)
-OBJCOPY := $(TOOL_DIR)/aarch64-none-elf-objcopy # (your GNU as here)
+CC := $(TOOL_DIR)/aarch64-none-elf-g++          # (your g++ here)
+LD := $(TOOL_DIR)/aarch64-none-elf-ld           # (your GNU ld here)
+AS := $(TOOL_DIR)/aarch64-none-elf-as           # (your GNU as here)
+OBJCOPY := $(TOOL_DIR)/aarch64-none-elf-objcopy # (your GNU objcopy here)
 
 .PHONY: all build
 
@@ -30,9 +29,3 @@ aarch64-build:
 
 clean:
 	@rm *.o */*.o *.elf *.img
-
-retard:
-	@echo "G++: $(CC)"
-	@echo "LD $(LD)"
-	@echo "AS $(AS)"
-

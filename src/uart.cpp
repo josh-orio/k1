@@ -1,8 +1,8 @@
 #include "uart.hpp"
 
 void uart_putc(char c) {
-    while ((UART0[0x18 / 4] & (1 << 5))) {} // Wait until TX FIFO is not full
-    UART0[0] = c;
+    while ((UART_FR & (1 << 5))) {} // Wait until TX FIFO is not full
+    UART_DR = c;
 }
 
 char uart_getc() {
@@ -15,3 +15,7 @@ void uart_puts(const char* str) {
         uart_putc(*str++);
     }
 }
+
+// char uart_gets() {
+//     // fetch n chars or until \n ?
+// }

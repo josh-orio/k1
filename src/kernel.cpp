@@ -1,9 +1,8 @@
 #include "kernel.hpp"
 #include "uart.hpp"
 
-// #include <iostream>
-
 extern "C" void kernel_main() {
+    
     uart_puts("Hello, World!\n");
     uart_puts("\thoi\n");
 

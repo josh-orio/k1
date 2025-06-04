@@ -2,15 +2,13 @@ BINUTILS_VERSION=2.44
 GCC_VERSION=15.1.0
 
 PWD=$(pwd)
-
 # echo $PWD
-
 export PREFIX="$PWD/cc" # installataion dir
 export TARGET=aarch64-none-elf
 export PATH="$PREFIX/bin:$PATH"
 
 # binutils
-only clone if not already present
+# only clone if not already present
 if [ ! -f binutils-$BINUTILS_VERSION.tar.xz ]; then
     wget https://ftp.gnu.org/gnu/binutils/binutils-$BINUTILS_VERSION.tar.xz
 fi
@@ -34,7 +32,7 @@ if [ ! -d gcc-$GCC_VERSION ]; then
     tar -xf gcc-$GCC_VERSION.tar.xz
 fi
 
-# download GMP, MPFR, MPC
+# download GMP, MPFR, MPC (prerequisites for gcc)
 cd gcc-$GCC_VERSION
 ./contrib/download_prerequisites
 cd ..
@@ -51,5 +49,4 @@ make install-target-libstdc++-v3
 
 cd ..
 
-
-# add to path?
+# add to path or symlink?

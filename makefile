@@ -23,7 +23,7 @@ aarch64-build:
 		$(CC) -c $${f} -Iinclude -o $${f%.cpp}.o -ffreestanding -O2 -Wall -Wextra -fno-exceptions -fno-rtti; \
 	done
 
-	@$(LD)  -Ttext=0x80000 boot/*.o src/*.o -o aarch64-$(PROJECT_NAME).elf
+	@$(LD) -Ttext=0x80000 boot/*.o src/*.o -o aarch64-$(PROJECT_NAME).elf
 	@$(OBJCOPY) -O binary aarch64-$(PROJECT_NAME).elf aarch64-$(PROJECT_NAME).img
 	@qemu-system-aarch64 -M virt -cpu cortex-a53 -nographic -kernel aarch64-$(PROJECT_NAME).img
 

@@ -3,18 +3,18 @@
 .section .text
 
 _start:
-    // Set up the stack pointer
+    // set up stack pointer
     ldr x0, =_stack_top
     mov sp, x0
 
-    // Call the main C++ function
+    // branch to entry point
     bl kernel_main
 
-    // Halt (infinite loop)
+    // halt loop
 1:  wfe
     b 1b
 
-// Stack (8 KB)
+// stack (8 KB)
 .section .bss
 .balign 16
 _stack:

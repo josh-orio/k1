@@ -1,6 +1,7 @@
-#ifndef UART_HPP
-#define UART_HPP
+#ifndef UART_H
+#define UART_H
 
+// #include <cstdint>
 #include <stdbool.h>
 #include <stdint.h>
 
@@ -12,6 +13,6 @@ void uart_putc(char c);
 void uart_puts(const char *str);
 
 char uart_getc();
-// void uart_gets() ;
+void uart_gets(char *str, uint32_t max_len) ;
 
 #endif

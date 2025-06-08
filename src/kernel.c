@@ -1,7 +1,7 @@
-#include "kernel.hpp"
-#include "uart.hpp"
+#include "kernel.h"
+#include "uart.h"
 
-extern "C" void kernel_main() {
+void kernel_main() {
     uart_puts("[K1] Beginning intialization.\n");
 
     
@@ -30,7 +30,7 @@ extern "C" void kernel_main() {
 
 }
 
-extern "C" void kernel_exit() {
+void kernel_exit() {
     uart_puts("[K1] Ready to exit.\n");
     register const uint64_t function_id asm("x0") = QEMU_SHUTDOWN_PORT;
     asm volatile("hvc #0" :: "r"(function_id));

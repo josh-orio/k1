@@ -1,5 +1,5 @@
-#ifndef INTERFACE_HPP
-#define INTERFACE_HPP
+#ifndef INTERFACE_H
+#define INTERFACE_H
 
 // API calls for programming with the microkernel
 

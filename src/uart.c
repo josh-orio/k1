@@ -1,4 +1,5 @@
 #include "uart.h"
+#include <stdint.h>
 
 void uart_putc(char c) {
   while ((UART_FR & (1 << 5))) {
@@ -17,13 +18,14 @@ void uart_puts(const char *str) {
     uart_putc(*str++);
   }
 }
+
 void uart_gets(char *str, uint32_t max_len) {
   char c;
-  // fetch n chars or until \n ?
+  uint32_t len = 0;
   do {
-    while (UART_FR & (1 << 4)) {
-    } // Wait for UART FIFO to be not empty
+    while (UART_FR & (1 << 4)) {} // Wait for UART FIFO to be not empty
     c = (char)UART_DR;
-    *str++ = c;
-  } while (c != '\n');
+    str[len] = c;
+    len++;
+  } while (c != '\n' && len <= max_len);
 }
